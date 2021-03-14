@@ -5,7 +5,7 @@ import pytest
 
 from PIL import Image
 
-
+@pytest.mark.skipif(is_win32(), reason="Fuzzer is linux only")
 @pytest.mark.parametrize(
     "path",
     subprocess.check_output("find Tests/images -type f", shell=True).split(b"\n"),
@@ -27,7 +27,7 @@ def test_fuzz_images(path):
         # Known Image.* exceptions
         assert True
 
-
+@pytest.mark.skipif(is_win32(), reason="Fuzzer is linux only")
 @pytest.mark.parametrize(
     "path", subprocess.check_output("find Tests/fonts -type f", shell=True).split(b"\n")
 )
